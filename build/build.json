@@ -1,0 +1,13 @@
+{
+	"vendor" : "src/vendor/index.js",
+	"app" : "src/app/index.js",
+	"template" : "deploy/app/templates.js",
+	"karmaFiles" : [
+		"deploy/app/vendor.js",
+		"./bower_components/angular-mocks/angular-mocks.js",
+		"deploy/app/templates.js",
+		"deploy/app/app.js",
+		"specs/unit/**/*.helper.js",
+		"specs/unit/**/*.spec.js"
+	]
+}

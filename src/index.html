@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html ng-app="svg-palette-picker">
+	<head>
+		<title></title>
+		<% _.each(cssFiles, function(fileName){ %>
+		<link rel="stylesheet" href="<%= fileName %>">
+		<% }); %>
+		<% _.each(jsFiles, function(fileName){ %>
+		<script src="<%= fileName %>" type="text/javascript"></script>
+		<% }); %>
+	</head>
+	<body>
+		
+	</body>
+</html>

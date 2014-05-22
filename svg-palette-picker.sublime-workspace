@@ -1,0 +1,385 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"T",
+				"BinaryTreeNode"
+			],
+			[
+				"BinaryTree",
+				"BinaryTreeNode"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 87.0,
+		"selected_items":
+		[
+			[
+				"package insta",
+				"Package Control: Install Package"
+			],
+			[
+				"javasc",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"spaces",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"tabs",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"coffee",
+				"Set Syntax: CoffeeScript"
+			],
+			[
+				"coffe",
+				"Set Syntax: CoffeeScript"
+			],
+			[
+				"package instal",
+				"Package Control: Install Package"
+			],
+			[
+				"package remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"package in",
+				"Package Control: Install Package"
+			],
+			[
+				"package inst",
+				"Package Control: Install Package"
+			],
+			[
+				"package remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"java",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"p",
+				"Package Control: Install Package"
+			],
+			[
+				"package",
+				"Package Control: Install Package"
+			],
+			[
+				"cofee",
+				"Coffee: Fast Compile"
+			],
+			[
+				"javascript",
+				"Set Syntax: JavaScript"
+			]
+		],
+		"width": 467.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), 'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ','%20')).read())"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/clarkpan/Documents/Job Search/resume/index.html",
+		"/Users/clarkpan/Documents/Workspace/checkout-mozart/app/config/app.coffee",
+		"/Users/clarkpan/Documents/Workspace/checkout-mozart/config/tasks/messageformat.js",
+		"/Users/clarkpan/Documents/Workspace/checkout-mozart/checkout.sublime-project",
+		"/Users/clarkpan/Documents/Workspace/checkout-mozart/config/tasks/templates/controller.hbs",
+		"/Users/clarkpan/Documents/Workspace/checkout-mozart/app/config/boot.coffee",
+		"/Users/clarkpan/Documents/Workspace/checkout-mozart/app/scss/big_ui_overrides.scss",
+		"/Users/clarkpan/Documents/Workspace/checkout-mozart/app/assets/lib/big-ui/css/fonts/opensans-light.woff",
+		"/Users/clarkpan/Documents/Workspace/checkout-app/vendor/angular-ui-router/release/angular-ui-router.js",
+		"/Users/clarkpan/Documents/Workspace/checkout-app/vendor/angular-ui-router/src/urlRouter.js",
+		"/Users/clarkpan/Documents/Workspace/checkout-app/vendor/angular/README.md",
+		"/Users/clarkpan/Documents/Workspace/checkout-app/vendor/big-ui/prototype/contents/myaccount-account-details-ok.json",
+		"/Users/clarkpan/Documents/Workspace/checkout-app/vendor/angular-ui-router/test/debug.js",
+		"/Users/clarkpan/Documents/Workspace/checkout-app/vendor/big-ui/deploy/handlebars_engine.js",
+		"/Users/clarkpan/Documents/Workspace/checkout-app/vendor/big-ui/app/components/icons/_vectoricondemo.handlebars",
+		"/Users/clarkpan/Documents/Workspace/checkout-app/vendor/angular-ui-router/src/view.js",
+		"/Users/clarkpan/Documents/Workspace/checkout-app/src/sass/_big_ui_overrides.scss",
+		"/Users/clarkpan/Documents/Workspace/checkout-app/src/index.html",
+		"/Users/clarkpan/Documents/Workspace/checkout-app/src/app/app.js",
+		"/Users/clarkpan/Documents/Workspace/checkout-app/.sass-cache/5c277b763ce80b1f715972e9de1a4932ccb106d6/_main.scssc",
+		"/Users/clarkpan/Documents/Workspace/checkout-app/src/sass/main.scss",
+		"/Users/clarkpan/Documents/Workspace/checkout-app/build/css/main.css",
+		"/Users/clarkpan/Documents/Workspace/checkout-app/build/app/main.js",
+		"/Users/clarkpan/Documents/Workspace/checkout-app/build/index.html",
+		"/Users/clarkpan/Documents/Workspace/checkout-app/vendor/big-ui/app/components/icons/_icons.scss",
+		"/Users/clarkpan/Documents/Workspace/checkout-app/Gruntfile.js",
+		"/Users/clarkpan/Documents/Workspace/checkout-app/checkout-app.sublime-project",
+		"/Users/clarkpan/Documents/Workspace/checkout-app/src/sass/views/_side.scss",
+		"/Users/clarkpan/Documents/Workspace/checkout-app/src/app/app.tpl.html",
+		"/Users/clarkpan/Documents/Workspace/checkout-app/vendor/big-ui/Gemfile",
+		"/Users/clarkpan/Documents/Workspace/checkout-app/vendor/big-ui/app/components/icons/icons.json",
+		"/Users/clarkpan/Documents/Workspace/checkout-app/vendor/big-ui/app/components/form/_form-simple-group.handlebars",
+		"/Users/clarkpan/Documents/Workspace/checkout-app/vendor/angular-ui-router/component.json",
+		"/Users/clarkpan/Documents/Workspace/checkout-app/vendor/big-ui/prototype/contents/myaccount-contacts-ok.json",
+		"/Users/clarkpan/Documents/Workspace/checkout-app/.sass-cache/75640fff35f57825ee18f946c95ef10ad0cf8fc0/_opacity.scssc",
+		"/Users/clarkpan/Documents/Workspace/checkout-app/src/sass/views/_main.scss",
+		"/Users/clarkpan/Documents/Workspace/checkout-app/src/app/co-side/co-side.tpl.html",
+		"/Users/clarkpan/Documents/Workspace/checkout-app/src/app/co-side/index.js",
+		"/Users/clarkpan/Documents/Workspace/checkout-app/src/app/co-side/index.tpl.html",
+		"/Users/clarkpan/Documents/Workspace/checkout-app/vendor/big-ui/prototype/contents/myaccount-account-details.json",
+		"/Users/clarkpan/Documents/Workspace/checkout-app/src/app/side/index.js",
+		"/Users/clarkpan/Documents/Workspace/checkout-app/src/app/side/controller.js",
+		"/Users/clarkpan/Documents/Workspace/checkout-app/src/app/side/side.tpl.html",
+		"/Users/clarkpan/Documents/Workspace/checkout-app/src/sass/default.scss",
+		"/Users/clarkpan/Documents/Workspace/checkout-app/vendor/big-ui/app/bigui.scss",
+		"/Users/clarkpan/Documents/Workspace/checkout-app/protractor",
+		"/Users/clarkpan/Documents/Workspace/checkout-app/package.json",
+		"/Users/clarkpan/Documents/Workspace/angularjs-boilerplate/Gruntfile.js",
+		"/Users/clarkpan/Documents/Workspace/angularjs-boilerplate/node_modules/bower/lib/core/resolvers/GitResolver.js",
+		"/Users/clarkpan/Documents/Workspace/angularjs-boilerplate/Gemfile",
+		"/Users/clarkpan/Documents/Workspace/boilerplates/angularjs-boilerplate/.gitignore",
+		"/Users/clarkpan/Documents/Workspace/boilerplates/angularjs-boilerplate/app/boot.js",
+		"/Users/clarkpan/Documents/Workspace/codewars/three_pass_compiler.coffee",
+		"/Users/clarkpan/Documents/Workspace/codewars/conway_game_of_life_unlimited.coffee",
+		"/Users/clarkpan/Documents/Workspace/codewars/style_ranking.coffee",
+		"/Users/clarkpan/Documents/Workspace/codewars/roman_numeral.coffee",
+		"/Users/clarkpan/Documents/Workspace/codewars/functional_binary_tree.coffee",
+		"/Users/clarkpan/Documents/Workspace/codewars/befunge.coffee",
+		"/Users/clarkpan/Library/Application Support/Sublime Text 3/Packages/User/untitled.coffee",
+		"/Users/clarkpan/Library/Application Support/Sublime Text 3/Installed Packages/Better CoffeeScript.sublime-package",
+		"/Users/clarkpan/Library/Application Support/Sublime Text 3/Packages/User/CoffeeCompile.sublime-settings",
+		"/Users/clarkpan/Library/Application Support/Sublime Text 3/Packages/CoffeeCompile/CoffeeCompile.sublime-settings",
+		"/Users/clarkpan/Library/Application Support/Sublime Text 3/Packages/User/CoffeeScript.sublime-settings",
+		"/Users/clarkpan/Library/Application Support/Sublime Text 3/Packages/Better CoffeeScript/CoffeeScript.sublime-settings",
+		"/Users/clarkpan/Library/Application Support/Sublime Text 3/Packages/Better CoffeeScript/Keymaps/Default (OSX).sublime-keymap",
+		"/Users/clarkpan/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/clarkpan/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/Users/clarkpan/Documents/Workspace/donation/assets/css/modules/panel.css"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			">\n",
+			"also",
+			"icon-",
+			"checkout_view",
+			"template",
+			"'=",
+			"=",
+			"fromConfig",
+			"fromString",
+			"templateUrl",
+			"\\b=\\b",
+			"'='",
+			"template",
+			"=",
+			"compass",
+			"watch",
+			"compass",
+			"inline-image",
+			"#{$prefix}item",
+			".-item",
+			"bower",
+			"require",
+			"charCodeAt",
+			"?=",
+			"remove",
+			":",
+			"\\\"",
+			"M\\\"",
+			"\\n"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.coffeecompile_output":
+	{
+		"height": 472.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "svg-palette-picker.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"vendorui-rou",
+				"vendor/angular-ui-router/release/angular-ui-router.js"
+			],
+			[
+				"project",
+				"checkout-app.sublime-project"
+			],
+			[
+				"app.js",
+				"src/app/app.js"
+			],
+			[
+				"app.tpl",
+				"src/app/app.tpl.html"
+			],
+			[
+				"projec",
+				"checkout-app.sublime-project"
+			],
+			[
+				"proj",
+				"checkout-app.sublime-project"
+			],
+			[
+				"componensiconscss",
+				"vendor/big-ui/app/components/icons/_icons.scss"
+			],
+			[
+				"grunt",
+				"Gruntfile.js"
+			],
+			[
+				"componentsicons",
+				"vendor/big-ui/app/components/icons/_icons.scss"
+			],
+			[
+				"app.tpl.html",
+				"src/app/app.tpl.html"
+			],
+			[
+				"index",
+				"src/app/co-side/index.tpl.html"
+			],
+			[
+				"main.scss",
+				"src/sass/main.scss"
+			],
+			[
+				"package",
+				"package.json"
+			],
+			[
+				"c",
+				"checkout-app.sublime-project"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 281.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
