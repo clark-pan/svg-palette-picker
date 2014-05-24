@@ -1,0 +1,13 @@
+<svg-view
+	file="$scope.activeFile"
+	palette="$scope.palette">
+</svg-view>
+<file-selector
+	files="$scope.files"
+	active-file="$scope.activeFile"
+	on-select-file="appCtrl.setActiveFile($file)"
+	on-add-file="appCtrl.addNewFile()">
+</file-selector>
+<color-selector
+	palette="$scope.palette">
+</color-selector>

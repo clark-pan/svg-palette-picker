@@ -9,7 +9,7 @@
 		<script src="<%= fileName %>" type="text/javascript"></script>
 		<% }); %>
 	</head>
-	<body>
+	<body ng-controller="AppCtrl as appCtrl" ng-include="appCtrl.templateUrl">
 		
 	</body>
 </html>

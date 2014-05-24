@@ -1,1 +1,1 @@
-require('angular-classy');
+require('./AppController.js');
