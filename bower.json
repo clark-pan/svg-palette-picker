@@ -22,6 +22,8 @@
     "ui-bootstrap": "~0.11.0",
     "angular-animate": "~1.2.16",
     "angular-classy": "~0.4.2",
-    "angular-mocks": "~1.2.16"
+    "color": "~2.4.0",
+    "angular-mocks": "~1.2.16",
+    "angular-resource": "~1.2.16"
   }
 }
