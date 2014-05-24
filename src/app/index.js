@@ -1,1 +1,1 @@
-require('./AppController.js');
+require('./AppCtrl.js');

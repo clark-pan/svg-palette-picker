@@ -22,8 +22,11 @@ namespace.factory('Color', [function(){
 				throw 'Color: needs at least 1 rgb value';
 			case 1:
 				originalRgb = modifiedRgb = arguments[0];
+			break;
+			//jshint -W086
 			case 2:
 			default:
+			//jshint +W086
 				originalRgb = arguments[0];
 				modifiedRgb = arguments[1];
 		}

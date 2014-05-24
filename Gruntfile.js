@@ -10,6 +10,18 @@ module.exports = function(grunt){
 		'clean' : {
 			'deploy' : './deploy'
 		},
+		'copy' : {
+			'sample' : {
+				'files' : [
+					{
+						'expand' : true,
+						'cwd' : './sample_data',
+						'src' : ['**/*'],
+						'dest' : './deploy/sample_data'
+					}
+				]
+			}
+		},
 		'browserify': {
 			'vendor' : {
 				'src' : buildVars.vendor,
@@ -50,7 +62,7 @@ module.exports = function(grunt){
 			},
 			'app' : {
 				'files' : 'src/app/**/*.js',
-				'tasks' : ['browserify:app']
+				'tasks' : ['jshint:app', 'browserify:app']
 			},
 			'index' : {
 				'files' : 'src/index.html',
@@ -59,6 +71,11 @@ module.exports = function(grunt){
 			'karma' : {
 				'files' : buildVars.karmaFiles,
 				'tasks' : ['karma:unit:run']
+			}
+		},
+		'jshint' : {
+			'app' : {
+				'src' : 'src/app/**/*.js'
 			}
 		},
 		'connect' : {
@@ -99,5 +116,5 @@ module.exports = function(grunt){
 	});
 
 	grunt.registerTask('default', ['dev']);
-	grunt.registerTask('dev', ['clean', 'index', 'html2js:app', 'browserify', 'karma:unit:start', 'connect:dev', 'watch']);
+	grunt.registerTask('dev', ['clean', 'jshint:app', 'copy:sample', 'index', 'html2js:app', 'browserify', 'karma:unit:start', 'connect:dev', 'watch']);
 }

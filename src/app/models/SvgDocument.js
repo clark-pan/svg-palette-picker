@@ -12,5 +12,6 @@ namespace.factory('SvgDocument', ['$resource', function($resource){
 	 * @property {String} svgUrl - url to the raw asset
 	 * @property {Object} palette - A key/value pair of modifications made to this palette
 	 */
-	return SvgDocument = $resource('/api/svg/:id.json');
+	var SvgDocument = $resource('/api/svg/:id.json');
+	return SvgDocument;
 }]);
