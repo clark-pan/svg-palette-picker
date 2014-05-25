@@ -1,6 +1,7 @@
 var namespace = require('../namespace.js'),
 	$ = require('jquery'),
-	_ = require('lodash');
+	_ = require('lodash'),
+	SvgUtils = require('../util/SvgUtils.js');
 
 	require('../models/Color');
 
@@ -9,38 +10,6 @@ var namespace = require('../namespace.js'),
  * Graphics directive that will register itself to a parent svgView
  */
 var svgGraphicDirective = ['$window', 'Color', function($window, Color){
-	var SVG_DEFAULTS = {
-		fill : '#000000',
-		stroke : '#000000'
-	};
-
-	/**
-	 * Encapsulates the logic of finding a color to key on for an element
-	 * 
-	 * @param  {Element} rawElement - element to search on
-	 * @param  {'fill' | 'stroke'} property - color property to find
-	 * @return {String | falsy}
-	 */
-	function getColorKey(rawElement, property){
-		var style = rawElement.style;
-
-		return style[property] || //Style overrides attribute
-			rawElement.getAttribute(property) ||
-			(rawElement.nodeName === 'svg' && SVG_DEFAULTS[property]); //We use the fill and stroke properties of the root svg elements to define the defaults
-	}
-
-	/**
-	 * Encapsulates the logic for determining whether or not this element has a stroke applied to it
-	 * @param  {Element} rawElement - element to determine
-	 * @return {Boolean}
-	 */
-	function hasStroke(rawElement){
-		var style = rawElement.style;
-
-		return style['stroke-width'] || //Style overrides attribute
-			rawElement.getAttribute('stroke-width');
-	}
-
 	return {
 		restrict : 'E',
 		require : '^?svgView',
@@ -50,9 +19,15 @@ var svgGraphicDirective = ['$window', 'Color', function($window, Color){
 				return;
 			}
 			var rawElement = $element[0];
-			var fillId = getColorKey(rawElement, 'fill');
-			var hasStrokeProperty = hasStroke(rawElement);
-			var strokeId = hasStrokeProperty && getColorKey(rawElement, 'stroke');
+			var fillId = SvgUtils.getColorKey(rawElement, 'fill');
+			var strokeId = SvgUtils.getColorKey(rawElement, 'stroke');
+			//Reset the default stroke-width of root svg to 0,
+			//so setting the default color does not affect the border width of child elements
+			//TODO revisit this
+			if(rawElement.nodeName === 'svg'){
+				rawElement.style.setProperty('stroke-width', 0);
+			}
+
 			if(fillId){
 				//Normalize the id
 				fillId = Color.getId(fillId);

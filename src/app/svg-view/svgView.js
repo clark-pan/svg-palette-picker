@@ -1,7 +1,8 @@
 var namespace = require('../namespace.js'),
 	$ = require('jquery'),
 	_ = require('lodash'),
-	color = require('onecolor');
+	color = require('onecolor'),
+	SvgUtils = require('../util/SvgUtils.js');
 
 require('./svgGraphicDirective.js');
 
@@ -44,9 +45,6 @@ namespace.classy.controller({
 namespace.directive('svgView', [
 	'$window', '$compile', '$animate',
 	function($window, $compile, $animate){
-		//TODO fallback if DomParser svg is not supported
-		var parser = new $window.DOMParser();
-
 		return {
 			restrict : 'EA',
 			require : 'svgView',
@@ -80,16 +78,7 @@ namespace.directive('svgView', [
 					var newElement = $window.document.createElement('div');
 					cleanupLastIncludeContent();
 					if(svgString){
-						var compiled;
-
-						try {
-							compiled = parser.parseFromString(svgString, 'image/svg+xml');
-							if( !compiled || compiled.getElementsByTagName( "parsererror").length || compiled.documentElement.tagName !== 'svg') {
-								compiled = undefined;
-							}
-						} catch (e){
-							compiled = undefined;
-						}
+						var compiled = SvgUtils.parseSvg(svgString);
 
 						if(compiled){
 							newElement.appendChild(compiled.documentElement);
