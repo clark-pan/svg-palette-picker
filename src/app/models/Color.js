@@ -1,21 +1,24 @@
 var namespace = require('../namespace.js'),
 	_ = require('lodash'),
-	color = require('onecolor');
+	color = require('onecolor'),
+	EventEmitter = require('events').EventEmitter;
 
 
-namespace.factory('Color', [function(){
+namespace.factory('Color', ['$cacheFactory', function($cacheFactory){
 	/**
 	 * @constructor Color
 	 * Represents a changable Color
-	 * 
+	 *
+	 * @extends {EventEmitter}
 	 * 
 	 * @property {String} id - a rgb/css value to key on
-	 * @property {onecolor} color - A one color object
 	 *
 	 * @param {String} originalRgb - RGB color value in css or hex form
 	 * @param {String} [modifiedRgb] - modified rgb value
 	 */
 	function Color(){
+		EventEmitter.apply(this);
+
 		var originalRgb, modifiedRgb;
 		switch(arguments.length){
 			case 0:
@@ -32,15 +35,44 @@ namespace.factory('Color', [function(){
 		}
 		this.id = Color.getId(originalRgb);
 
-		this.setColor(modifiedRgb || originalRgb);
+		this.setColor(modifiedRgb || originalRgb, true);
 	}
 
-	Color.prototype = {
+	Color.prototype = _.create(EventEmitter.prototype, {
 		constructor: Color,
-		setColor : function(rgb){
-			this.color = color(rgb);
+		setColor : function(rgb, silent){
+			var old = this._color;
+			this._color = color(rgb);
+
+			if(!silent){
+				/**
+				 * Update event
+				 *
+				 * @event Color#update
+				 * @property {Color} event.target - the instance emitting the event
+				 * @property {onecolor} event.newValue - the update color object
+				 * @property {onecolor} event.oldValue - the old color object
+				 */
+				this.emit('update', {
+					target : this,
+					newValue : this._color,
+					oldValue : old
+				});
+			}
+		},
+		getCss : function(){
+			return this._color && this._color.css();
+		},
+		getRgb : function(){
+			return this._color && this._color.rgb();
+		},
+		toJSON : function(){
+			return {
+				id : this.id,
+				color : this.getRgb()
+			};
 		}
-	};
+	});
 
 	_.assign(Color, {
 		/**

@@ -1,6 +1,7 @@
 var namespace = require('../namespace.js'),
 	$ = require('jquery'),
-	_ = require('lodash');
+	_ = require('lodash'),
+	color = require('onecolor');
 
 require('./svgGraphicDirective.js');
 
@@ -12,19 +13,24 @@ namespace.classy.controller({
 	name : 'SvgViewCtrl',
 	inject : ['$scope'],
 	init : function(){
-		this.elements = [];
+		_.bindAll(this, ['onColorChange']);
 	},
-	registerElement : function(svgElement){
-		console.log(svgElement);
+	onColorChange: function(colors){
+		this.$scope.$broadcast('updateColor', colors);
 	},
-	deregisterElement : function(svgElement){
+	getColors: function(){
+		return this.$scope.palette && this.$scope.palette.getColors();
+	},
+	watch: {
+		'palette': function(palette, oldPalette){
+			if(oldPalette){
+				oldPalette.removeListener('update', this.onColorChange);
+			}
 
-	},
-	_registerColorFill : function(rgb, $element){
-
-	},
-	_registerColorStroke : function(rgb, $element){
-
+			if(palette){
+				palette.on('update', this.onColorChange);
+			}
+		}
 	}
 });
 
