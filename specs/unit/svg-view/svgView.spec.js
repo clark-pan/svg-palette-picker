@@ -4,6 +4,7 @@ describe('svgView', function(){
 	function createDirective($injector) {
 		return $injector.invoke(function($compile, $rootScope){
 			var directive = $compile('<svg-view palette="palette" svg="svg"></svg-view>')($rootScope);
+			$rootScope.$digest();
 			var scope = directive.isolateScope();
 			var controller = directive.controller();
 			return {

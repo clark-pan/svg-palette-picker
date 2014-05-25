@@ -1,9 +1,10 @@
 {
+	"id" : "Wien_3_Wappen",
 	"svgUrl" : "/data/images/Wien_3_Wappen.svg",
-	"palette" : {
-		"#ffe600" : "#ffe600",
-		"#000000" : "#000000",
-		"white" : "white",
-		"red" : "red"
-	}
+	"palette" : [
+		"#ffe600",
+		"#000000",
+		"white",
+		"red"
+	]
 }

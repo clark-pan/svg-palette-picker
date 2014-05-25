@@ -36,7 +36,7 @@ module.exports = function(grunt){
 				'options' : {
 					'external' : externalFiles,
 					'bundleOptions' : {
-						'debug' : true
+						//'debug' : true
 					}
 				}
 			}
@@ -71,6 +71,10 @@ module.exports = function(grunt){
 			'karma' : {
 				'files' : buildVars.karmaFiles,
 				'tasks' : ['karma:unit:run']
+			},
+			'compass' : {
+				'files' : 'src/sass/**/*.scss',
+				'tasks' : ['compass:dev']
 			}
 		},
 		'jshint' : {
@@ -84,29 +88,58 @@ module.exports = function(grunt){
 				'hostname' : '*',
 				'base' : './deploy',
 				'middleware' : function(connect, options, middlewares) {
-					middlewares.unshift(function(req, res, next){
-						var fs = require('fs');
-						var q = require('q');
-						qReadDir = q.denodeify(fs.readdir);
-						qReadFile = q.denodeify(fs.readFile);
+					var fs = require('fs');
+					var q = require('q');
+					qReadDir = q.denodeify(fs.readdir);
+					qReadFile = q.denodeify(fs.readFile);
+					qWriteFile = q.denodeify(fs.writeFile);
 
-						if(req.url !== '/data/documents') return next();
+					var rest = require('connect-rest');
 
+					function getAsJSON(path){
+						return qReadFile(path, {
+							encoding : 'utf8'
+						}).then(function(contents){
+							return JSON.parse(contents);
+						});
+					}
+
+					rest.get('/data/documents', function(req, content, next){
 						qReadDir('./deploy/data/documents').then(function(paths){
 							var paths = _.chain(paths)
 								.map(function(path){
-									return qReadFile('./deploy/data/documents/' + path, {
-										encoding : 'utf8'
-									}).then(function(document){
-										return JSON.parse(document);
-									});
+									return getAsJSON('./deploy/data/documents/' + path);
 								})
 								.value();
 							return q.all(paths);
 						}).then(function(documents){
-							res.end(JSON.stringify(documents));
+							next(null, documents);
+						}, function(rejection){
+							next(rejection)
 						});
 					});
+
+					rest.get('/data/documents/:id', function(req, content, next){
+						if(!req.parameters.id) next();
+						getAsJSON('./deploy/data/documents/' + req.parameters.id + '.json')
+							.then(function(document){
+								next(null, document);
+							}, function(rejection){
+								next(rejection);
+							});
+					});
+
+					rest.post('/data/documents/:id', function(req, content, next){
+						if(!req.parameters.id) next();
+						qWriteFile('./deploy/data/documents/' + req.parameters.id + '.json', JSON.stringify(content))
+							.then(function(){
+								next(null, content);
+							}, function(rejection){
+								next(rejection);
+							});
+					});
+
+					middlewares = [connect.query(), connect.urlencoded(), connect.json(), rest.rester()].concat(middlewares);
 
 					return middlewares;
 				}
@@ -120,10 +153,26 @@ module.exports = function(grunt){
 				'configFile' : './specs/karma.conf.js'
 			},
 			'unit': {
-				background: true
+				'background': true
 			},
 			'continuous' : {
 				'singleRun': true
+			}
+		},
+		'compass' : {
+			'options' : {
+				'config' : 'build/compass.rb'
+			},
+			'dev' : {
+				'environment' : 'development'
+			},
+			'package' : {
+				'environment' : 'production'
+			}
+		},
+		'shell' : {
+			'bootstrap-font': {
+				'command' : 'mkdir -p deploy/static/fonts && cp -r $(bundle show bootstrap-sass)/vendor/assets/fonts/ deploy/static/fonts'
 			}
 		}
 	});
@@ -134,7 +183,7 @@ module.exports = function(grunt){
 				_.partialRight(_.bind(grunt.template.process, grunt.template), {
 					data : {
 						jsFiles : ['app/vendor.js', 'app/templates.js', 'app/app.js'],
-						cssFiles : []
+						cssFiles : ['static/css/index.css']
 					}
 				}),
 				_.bind(grunt.file.read, grunt.file, './src/index.html')
@@ -143,5 +192,5 @@ module.exports = function(grunt){
 	});
 
 	grunt.registerTask('default', ['dev']);
-	grunt.registerTask('dev', ['clean', 'jshint:app', 'copy:sample', 'index', 'html2js:app', 'browserify', 'karma:unit:start', 'connect:dev', 'watch']);
+	grunt.registerTask('dev', ['clean', 'jshint:app', 'copy:sample', 'shell:bootstrap-font', 'index', 'html2js:app', 'browserify', 'compass:dev', 'karma:unit:start', 'connect:dev', 'watch']);
 }

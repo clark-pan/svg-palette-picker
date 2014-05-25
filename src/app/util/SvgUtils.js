@@ -13,7 +13,7 @@ var SvgUtils = {
 	getColorKey : function(rawElement, property){
 		var style = rawElement.style;
 
-		return style[property] || //Style overrides attribute
+		return style.getPropertyValue(property) || //Style overrides attribute
 			rawElement.getAttribute(property) ||
 			(rawElement.nodeName === 'svg' && SvgUtils.SVG_DEFAULTS[property]); //We use the fill and stroke properties of the root svg elements to define the defaults
 	},

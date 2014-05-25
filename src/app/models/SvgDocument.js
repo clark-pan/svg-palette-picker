@@ -1,4 +1,6 @@
-var namespace = require('../namespace.js');
+var namespace = require('../namespace.js'),
+	_ = require('lodash'),
+	SvgUtils = require('../util/SvgUtils.js');
 
 
 namespace.factory('SvgDocument', ['$resource', function($resource){
@@ -12,6 +14,8 @@ namespace.factory('SvgDocument', ['$resource', function($resource){
 	 * @property {String} svgUrl - url to the raw asset
 	 * @property {Object} palette - A key/value pair of modifications made to this palette
 	 */
-	var SvgDocument = $resource('/api/svg/:id.json');
+	var SvgDocument = $resource('/data/documents/:id', {'id' : '@id'}, {
+		'query':  {method:'GET', isArray:true, url:'/data/documents'}
+	});
 	return SvgDocument;
 }]);

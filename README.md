@@ -7,6 +7,7 @@ A demo application that allows you to edit a svg file's color palette and save a
 ```
 npm install -g bower grunt-cli
 npm install
+bundle install
 bower install
 ```
 

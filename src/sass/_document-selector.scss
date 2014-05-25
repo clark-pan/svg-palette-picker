@@ -1,0 +1,17 @@
+.document-selector {
+	position: fixed;
+	top: 20px;
+	left: 20px;
+	width: 100px;
+
+	@include box-shadow(0 0 3px rgba(0, 0, 0, 0.2));
+
+	img {
+		max-width: 100%;
+	}
+
+	.btn {
+		border: 0px;
+		@include border-top-radius(0px);
+	}
+}

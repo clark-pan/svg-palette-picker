@@ -8,6 +8,8 @@ require('./models/Palette.js');
 
 //Views
 require('./svg-view/svgView.js');
+require('./document-selector/documentSelector.js');
+require('./color-selector/colorSelector.js');
 
 /**
  * @constructor AppCtrl
@@ -15,29 +17,51 @@ require('./svg-view/svgView.js');
  */
 namespace.classy.controller({
 	name : 'AppCtrl',
-	inject : ['$scope', '$http', 'Palette'],
+	inject : ['$scope', '$http', 'Palette', 'SvgDocument'],
 	templateUrl : 'app/app.tpl.html',
 	init : function(){
 		var $scope = this.$scope;
-		var $http = this.$http;
-		var Palette = this.Palette;
-		$http.get('/data/documents').then(function(response){
-			var documents = response.data;
-			var data = documents[0];
-			$http.get(data.svgUrl).then(function(response){
-				$scope.document = {
-					svg : response.data
-				};
-			});
+		var SvgDocument = this.SvgDocument;
 
-			$scope.palette = new Palette(data.palette);
+		//Simplistic way of tracking which is the latest svg file loaded
+		this.svgChangeCount = 0;
+
+		SvgDocument.query().$promise.then(function(documents){
+			$scope.documents = documents;
+			if(documents.length){
+				$scope.activeDocument = documents[0];
+			}
 		});
+	},
+	watch : {
+		'activeDocument' : function(activeDocument){
+			var _this = this;
+			var $http = this.$http;
+			var svgCount = ++this.svgChangeCount;
+			var $scope = this.$scope;
+			var Palette = this.Palette;
 
-		setInterval(function(){
-			$scope.$apply(function(){
-				var randomColor = _.shuffle($scope.palette.getColors())[0];
-				randomColor.setColor('#' + Math.floor(Math.random() * Math.pow(256, 3)).toString(16));
-			});
-		}, 1000);
+			if(activeDocument){
+				$http.get(activeDocument.svgUrl).then(function(response){
+					if(svgCount != _this.svgChangeCount){
+						return;
+					}
+					$scope.activeSvg = response.data;
+					$scope.palette = new Palette(activeDocument.palette);
+				});
+			} else {
+				$scope.activeSvg = null;
+				$scope.palette = null;
+			}
+		}
+	},
+	onDocumentSave : function() {
+		var $scope = this.$scope;
+		var activeDocument = $scope.activeDocument;
+		activeDocument.palette = $scope.palette.toJSON();
+		activeDocument.$save();
+	},
+	onDocumentExport : function() {
+		//TODO use XMLSerializer to create a file, use window.URL.createObjURL to create a download link
 	}
 });

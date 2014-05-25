@@ -1,5 +1,4 @@
 var namespace = require('../namespace.js'),
-	$ = require('jquery'),
 	_ = require('lodash'),
 	SvgUtils = require('../util/SvgUtils.js');
 
@@ -7,9 +6,9 @@ var namespace = require('../namespace.js'),
 
 /**
  * @constructor svgGraphicDirective
- * Graphics directive that will register itself to a parent svgView
+ * Directive that augments any graphics type svg element
  */
-var svgGraphicDirective = ['$window', 'Color', function($window, Color){
+var svgGraphicDirective = ['Color', function(Color){
 	return {
 		restrict : 'E',
 		require : '^?svgView',

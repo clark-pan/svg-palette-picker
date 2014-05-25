@@ -9,7 +9,20 @@
 		<script src="<%= fileName %>" type="text/javascript"></script>
 		<% }); %>
 	</head>
-	<body ng-controller="AppCtrl as appCtrl" ng-include="appCtrl.templateUrl">
-		
+	<body ng-controller="AppCtrl as appCtrl">
+		<svg-view
+			svg="activeSvg"
+			palette="palette">
+		</svg-view>
+		<document-selector
+			documents="documents"
+			active-document="activeDocument"
+			download-uri="downloadUri"
+			on-document-save="appCtrl.onDocumentSave()"
+			on-document-export="appCtrl.onDocumentExport()">
+		</document-selector>
+		<color-selector
+			palette="palette">
+		</color-selector>
 	</body>
 </html>

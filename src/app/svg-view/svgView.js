@@ -54,6 +54,8 @@ namespace.directive('svgView', [
 				'svg' : '=',
 				'palette' : '='
 			},
+			templateUrl : 'app/svg-view/svgView.tpl.html',
+			replace : true,
 			link : function($scope, $element, $attr, svgViewCtrl){
 				var previousElement, currentElement, currentScope;
 				var cleanupLastIncludeContent = function() {

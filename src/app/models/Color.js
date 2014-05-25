@@ -66,10 +66,13 @@ namespace.factory('Color', ['$cacheFactory', function($cacheFactory){
 		getRgb : function(){
 			return this._color && this._color.rgb();
 		},
+		getHex : function(){
+			return this._color && this._color.hex();
+		},
 		toJSON : function(){
 			return {
 				id : this.id,
-				color : this.getRgb()
+				color : this.getHex()
 			};
 		}
 	});
