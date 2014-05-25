@@ -1,7 +1,8 @@
 var SvgUtils = {
 	SVG_DEFAULTS : {
 		fill : '#000000',
-		stroke : '#000000'
+		stroke : '#000000',
+		'color-stop' : '#000000'
 	},
 	/**
 	 * Encapsulates the logic of finding a color to key on for an element

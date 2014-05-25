@@ -1,0 +1,13 @@
+{
+	"id" : "NewTux",
+	"svgUrl" : "/data/images/NewTux.svg",
+	"palette" : [
+		"#3f2600",
+		"#ffa63f",
+		"#ffff00",
+		"#ffeed7",
+		"#bdbfc2",
+		"#ffffff",
+		"#000000"
+	]
+}

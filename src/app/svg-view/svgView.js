@@ -5,6 +5,7 @@ var namespace = require('../namespace.js'),
 	SvgUtils = require('../util/SvgUtils.js');
 
 require('./svgGraphicDirective.js');
+require('./svgGradientDirective.js');
 
 /**
  * @constructor SvgViewCtrl
