@@ -1,4 +1,5 @@
-var namespace = require('./namespace.js');
+var namespace = require('./namespace.js'),
+	_ = require('lodash');
 
 //Models
 require('./models/SvgDocument.js');
@@ -18,28 +19,25 @@ namespace.classy.controller({
 	templateUrl : 'app/app.tpl.html',
 	init : function(){
 		var $scope = this.$scope;
+		var $http = this.$http;
 		var Palette = this.Palette;
-		this.$http.get('/sample_data/Wien_3_Wappen.svg').then(function(response){
-			$scope.document = {
-				svg : response.data
-			};
-		});
+		$http.get('/data/documents').then(function(response){
+			var documents = response.data;
+			var data = documents[0];
+			$http.get(data.svgUrl).then(function(response){
+				$scope.document = {
+					svg : response.data
+				};
+			});
 
-		//Test data for now
-		//TODO remove
-		$scope.palette = new Palette();
-		$scope.palette.addColors([
-			{
-				id : "#000000",
-				color : "#FF0000"
-			}
-		]);
+			$scope.palette = new Palette(data.palette);
+		});
 
 		setInterval(function(){
 			$scope.$apply(function(){
-				var firstColor = $scope.palette.getColors()['#000000'];
-				firstColor.setColor('#' + Math.floor(Math.random() * Math.pow(256, 3)).toString(16));
+				var randomColor = _.shuffle($scope.palette.getColors())[0];
+				randomColor.setColor('#' + Math.floor(Math.random() * Math.pow(256, 3)).toString(16));
 			});
-		}, 500);
+		}, 1000);
 	}
 });

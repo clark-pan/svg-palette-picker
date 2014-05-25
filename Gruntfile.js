@@ -17,7 +17,7 @@ module.exports = function(grunt){
 						'expand' : true,
 						'cwd' : './sample_data',
 						'src' : ['**/*'],
-						'dest' : './deploy/sample_data'
+						'dest' : './deploy/data'
 					}
 				]
 			}
@@ -82,7 +82,34 @@ module.exports = function(grunt){
 			'options' : {
 				'port' : 3000,
 				'hostname' : '*',
-				'base' : './deploy'
+				'base' : './deploy',
+				'middleware' : function(connect, options, middlewares) {
+					middlewares.unshift(function(req, res, next){
+						var fs = require('fs');
+						var q = require('q');
+						qReadDir = q.denodeify(fs.readdir);
+						qReadFile = q.denodeify(fs.readFile);
+
+						if(req.url !== '/data/documents') return next();
+
+						qReadDir('./deploy/data/documents').then(function(paths){
+							var paths = _.chain(paths)
+								.map(function(path){
+									return qReadFile('./deploy/data/documents/' + path, {
+										encoding : 'utf8'
+									}).then(function(document){
+										return JSON.parse(document);
+									});
+								})
+								.value();
+							return q.all(paths);
+						}).then(function(documents){
+							res.end(JSON.stringify(documents));
+						});
+					});
+
+					return middlewares;
+				}
 			},
 			'dev' : {
 				'keepalive' : false
