@@ -41,7 +41,14 @@ namespace.factory('Palette', ['Color', '$cacheFactory', function(Color, $cacheFa
 				return;
 			}
 
-			if(!_.isArray(colors)){
+			if(_.isPlainObject(colors)){
+				colors = _.map(colors, function(value, key){
+					return {
+						id : key,
+						color : value
+					};
+				});
+			} else if(!_.isArray(colors)){
 				colors = [colors];
 			}
 

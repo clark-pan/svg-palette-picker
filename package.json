@@ -49,7 +49,7 @@
     "angular": "./bower_components/angular/angular.js",
     "angular-classy": "./bower_components/angular-classy/angular-classy.js",
     "angular-resource": "./bower_components/angular-resource/angular-resource.js",
-    "onecolor": "./bower_components/color/one-color-debug.js"
+    "onecolor": "./bower_components/color/one-color-all-debug.js"
   },
   "browserify-shim": {
     "angular": {

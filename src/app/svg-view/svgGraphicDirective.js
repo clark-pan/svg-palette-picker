@@ -8,11 +8,38 @@ var namespace = require('../namespace.js'),
  * @constructor svgGraphicDirective
  * Graphics directive that will register itself to a parent svgView
  */
-var svgGraphicDirective = ['Color', function(Color){
-	var COLOR_DEFAULTS = {
-		FILL : '#000000',
-		STROKE : '#000000'
+var svgGraphicDirective = ['$window', 'Color', function($window, Color){
+	var SVG_DEFAULTS = {
+		fill : '#000000',
+		stroke : '#000000'
 	};
+
+	/**
+	 * Encapsulates the logic of finding a color to key on for an element
+	 * 
+	 * @param  {Element} rawElement - element to search on
+	 * @param  {'fill' | 'stroke'} property - color property to find
+	 * @return {String | falsy}
+	 */
+	function getColorKey(rawElement, property){
+		var style = rawElement.style;
+
+		return style[property] || //Style overrides attribute
+			rawElement.getAttribute(property) ||
+			(rawElement.nodeName === 'svg' && SVG_DEFAULTS[property]); //We use the fill and stroke properties of the root svg elements to define the defaults
+	}
+
+	/**
+	 * Encapsulates the logic for determining whether or not this element has a stroke applied to it
+	 * @param  {Element} rawElement - element to determine
+	 * @return {Boolean}
+	 */
+	function hasStroke(rawElement){
+		var style = rawElement.style;
+
+		return style['stroke-width'] || //Style overrides attribute
+			rawElement.getAttribute('stroke-width');
+	}
 
 	return {
 		restrict : 'E',
@@ -23,9 +50,16 @@ var svgGraphicDirective = ['Color', function(Color){
 				return;
 			}
 			var rawElement = $element[0];
-			var style = rawElement.style;
-			var fillId = Color.getId(style.fill || rawElement.getAttribute('fill') || COLOR_DEFAULTS.FILL);
-			var strokeId = Color.getId(style.stroke || rawElement.getAttribute('stroke') || COLOR_DEFAULTS.STROKE);
+			var fillId = getColorKey(rawElement, 'fill');
+			var hasStrokeProperty = hasStroke(rawElement);
+			var strokeId = hasStrokeProperty && getColorKey(rawElement, 'stroke');
+			if(fillId){
+				//Normalize the id
+				fillId = Color.getId(fillId);
+			}
+			if(strokeId){
+				strokeId = Color.getId(strokeId);
+			}
 
 			$scope.$on('updateColor', function(event, colors){
 				updateColor(colors);
@@ -35,21 +69,22 @@ var svgGraphicDirective = ['Color', function(Color){
 
 			function updateColor(colors){
 				var fillColor = colors[fillId];
-				if(fillColor){
-					style.setProperty('fill', fillColor.getCss());
+				if(fillId && fillColor){
+					rawElement.style.setProperty('fill', fillColor.getCss());
 				}
 
 				var strokeColor = colors[strokeId];
-				if(strokeColor){
-					style.setProperty('stroke', strokeColor.getCss());
+				if(strokeId && strokeColor){
+					rawElement.style.setProperty('stroke', strokeColor.getCss());
 				}
 			}
 		}
 	};
 }];
 
-//List of SVG elements from : https://developer.mozilla.org/en-US/docs/Web/SVG/Element#Graphics_elements
+
 _.each([
+	//List of graphics elements from : https://developer.mozilla.org/en-US/docs/Web/SVG/Element#Graphics_elements
 	"circle",
 	"ellipse",
 	"image",
@@ -59,6 +94,19 @@ _.each([
 	"polyline",
 	"rect",
 	"text",
-	"use"
+	"use",
+	"a",
+	"defs",
+	"glyph",
+	//List of container elements : https://developer.mozilla.org/en-US/docs/Web/SVG/Element#Container_elements
+	//TODO probably best to seperate these two types out, but it works for now
+	"g",
+	"marker",
+	"mask",
+	"missing-glyph",
+	"pattern",
+	"svg",
+	"switch",
+	"symbol"
 ], _.compose(_.partialRight(_.bind(namespace.directive, namespace), svgGraphicDirective), _.identity)
 );

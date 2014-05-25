@@ -81,7 +81,8 @@ namespace.factory('Color', ['$cacheFactory', function($cacheFactory){
 		 * @return {String}
 		 */
 		getId: function(rgb){
-			return color(rgb).hex();
+			var colorObj = color(rgb);
+			return colorObj && colorObj.hex();
 		}
 	});
 
